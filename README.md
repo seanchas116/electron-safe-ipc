@@ -52,6 +52,8 @@ API
 
 Send a message between processes.
 
+The arguments are packed into JSON.
+
 The message is sent to all renderer processes when you call this from the main process.
 
 ### `ipc.on(channel, callback)`
