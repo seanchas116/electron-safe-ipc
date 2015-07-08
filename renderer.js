@@ -20,8 +20,10 @@ ipc.send = function () {
 }
 
 window.__electronSafeIpc = function (name, argsJson) {
-  var args = JSON.parse(argsJson);
-  ipc.emit.apply(ipc, [name].concat(args));
+  process.nextTick(function () {
+    var args = JSON.parse(argsJson);
+    ipc.emit.apply(ipc, [name].concat(args));
+  });
 };
 
 module.exports = ipc;
