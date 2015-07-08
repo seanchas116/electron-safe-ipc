@@ -1,7 +1,10 @@
 "use strict";
 
 var assert = require("chai").assert;
+var mainWindow = require("../mainWindow");
 
-it("fails", function () {
-  assert.equal(1, 2);
+describe("mainWindow title", function () {
+  it("is Test", function () {
+    assert.equal(mainWindow.getTitle(), "Title");
+  });
 });
