@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "electron test"
+    "testBundle": "browserify test/index.js -o test/bundle.js",
+    "test": "npm run testBundle && electron test"
   },
   "author": "",
   "license": "MIT",
