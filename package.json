@@ -12,6 +12,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "electron-packager": "^5.0.0",
     "mocha": "^2.2.5"
   }
 }
