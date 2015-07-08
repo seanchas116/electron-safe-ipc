@@ -8,6 +8,12 @@ electron-safe-ipc is a safe communication library between the main process and r
 * Works even when `node-integration` == `false` in renderer processes
 * Works without JS object instance sharing
 
+It uses:
+
+* JSON to pack data
+* Electron `protocol` to send message to main process
+* Electron `WebContents.executeJavaScript` to send message to renderer process
+
 Used in [Wantedly, Inc.](https://www.wantedly.com/)
 
 Install
