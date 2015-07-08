@@ -64,6 +64,6 @@ The message is sent to all renderer processes when you call this from the main p
 
 ### `ipc.on(channel, callback)`
 
-Receives messages.
+Receive messages.
 
 Other `EventEmitter` methods can also be used to listen to messages.
