@@ -1,7 +1,7 @@
 {
   "name": "electron-safe-ipc",
   "version": "0.1.0",
-  "description": "",
+  "description": "Safe communication between main process and renderer processes in Electron",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -10,12 +10,29 @@
     "testBundle": "browserify test/index.js -o test/bundle.js",
     "test": "npm run testBundle && electron test"
   },
-  "author": "",
+  "author": "Ryohei Ikegami <iofg2100@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "browserify": "^10.2.4",
     "chai": "^3.0.0",
     "electron-packager": "^5.0.0",
     "mocha": "^2.2.5"
-  }
+  },
+  "dependencies": {
+    "browserify": "^10.2.4",
+    "chai": "^3.0.0",
+    "electron-packager": "^5.0.0"
+  },
+  "keywords": [
+    "electron",
+    "ipc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanchas116/electron-safe-ipc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/seanchas116/electron-safe-ipc/issues"
+  },
+  "homepage": "https://github.com/seanchas116/electron-safe-ipc#readme"
 }
