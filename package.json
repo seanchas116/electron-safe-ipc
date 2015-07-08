@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "testBundle": "browserify test/index.js -o test/bundle.js",
-    "test": "npm run testBundle && electron test"
+    "pretest": "browserify test/index.js -o test/bundle.js",
+    "test": "electron test"
   },
   "author": "Ryohei Ikegami <iofg2100@gmail.com>",
   "license": "MIT",
