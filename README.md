@@ -1,4 +1,4 @@
-electron-safe-ipc
+electron-safe-ipc [![npm version](https://badge.fury.io/js/electron-safe-ipc.svg)](http://badge.fury.io/js/electron-safe-ipc)
 ================
 
 electron-safe-ipc is a safe communication library between the main process and renderer processes in Electron.
