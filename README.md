@@ -49,6 +49,21 @@ ipc.on("fromMain", function (a, b) {
 });
 ```
 
+### Use main-side ipc in renderer process
+
+You can use main-side `ipc` in renderer processes with `remote.require`.
+This is useful for communication between Node enabled renderer processes and Node disabled `<webview>`.
+
+```js
+var remote = require("remote");
+var ipc = remote.require("electron-safe-ipc/main");
+
+ipc.on("fromRenderer", function (a, b) {
+  console.log("fromRenderer received", a, b);
+});
+ipc.send("fromMain", 1, 2);
+```
+
 API
 ----------------
 
