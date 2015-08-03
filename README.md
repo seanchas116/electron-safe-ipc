@@ -39,6 +39,8 @@ ipc.send("fromMain", 1, 2);
 
 ### Renderer process
 
+#### Node style
+
 If "node-integration" is disabled, use bundling tools (e.g., browserify).
 
 ```js
@@ -47,6 +49,17 @@ var ipc = require("electron-safe-ipc/renderer");
 ipc.on("fromMain", function (a, b) {
   ipc.send("fromRenderer", a, b);
 });
+```
+
+#### Traditional style (UMD)
+
+```html
+<script src="path/to/node_modules/electron-safe-ipc/renderer-bundle.js"></script>
+<script>
+  electronSafeIpc.on("fromMain", function (a1, a2) {
+    electronSafeIpc.send("fromRenderer", a1, a2);
+  });
+</script>
 ```
 
 ### Use main-side ipc in renderer process
