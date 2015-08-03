@@ -41,7 +41,7 @@ ipc.send("fromMain", 1, 2);
 
 #### Node style
 
-If "node-integration" is disabled, use bundling tools (e.g., browserify).
+If `"node-integration"` is disabled, use bundling tools (e.g., [browserify](http://browserify.org/)).
 
 ```js
 var ipc = require("electron-safe-ipc/renderer");
