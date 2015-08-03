@@ -80,7 +80,7 @@ ipc.send("fromMain", 1, 2);
 API
 ----------------
 
-`ipc` is an `EventEmitter`.
+`ipc` is an [`EventEmitter`](https://nodejs.org/api/events.html#events_class_events_eventemitter).
 
 ### `ipc.send(channel, ...args)`
 
