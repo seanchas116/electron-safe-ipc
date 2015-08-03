@@ -6,5 +6,10 @@
   </head>
   <body>
   </body>
-  <script src="./bundle.js"></script>
+  <script src="../renderer-bundle.js"></script>
+  <script>
+    electronSafeIpc.on("fromMain", function (a1, a2) {
+      electronSafeIpc.send("fromRenderer", a1, a2);
+    });
+  </script>
 </html>

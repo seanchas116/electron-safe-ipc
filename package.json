@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "pretest": "browserify test/index.js -o test/bundle.js",
+    "renderer-bundle": "browserify renderer.js -o renderer-bundle.js -s electronSafeIpc",
+    "pretest": "npm run renderer-bundle",
     "test": "electron test"
   },
   "author": "Ryohei Ikegami <iofg2100@gmail.com>",
