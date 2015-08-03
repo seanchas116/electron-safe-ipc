@@ -13,7 +13,7 @@
   "author": "Ryohei Ikegami <iofg2100@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "browserify": "^10.2.4",
+    "browserify": "^11.0.1",
     "chai": "^3.0.0",
     "electron-prebuilt": "^0.29.2",
     "mocha": "^2.2.5"
