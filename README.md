@@ -82,7 +82,7 @@ API
 
 `ipc` is an [`EventEmitter`](https://nodejs.org/api/events.html#events_class_events_eventemitter).
 
-### `ipc.send(channel, ...args)`
+### `ipc.send(channel: string, ...args)`
 
 Send a message between processes.
 
@@ -90,8 +90,44 @@ The arguments are packed into JSON.
 
 The message is sent to all renderer processes when you call this from the main process.
 
-### `ipc.on(channel, callback)`
+### `ipc.on(channel: string, callback: (...args) => void)`
 
 Receive messages.
 
-Other `EventEmitter` methods can also be used to listen to messages.
+**Other `EventEmitter` methods can also be used to listen to messages.**
+
+### `ipc.request(requestName: string, ...args): Promise`
+
+Sends a request to the other side and get the response as `Promise`.
+
+```js
+var ipc = require("electron-safe-ipc/renderer");
+
+ipc.request("add", 1, 2)
+  .then(function(res) {
+    console.log(res);
+  });
+
+ipc.request("wait", 1000)
+  .then(function(res) {
+    console.log("waited 1000 ms");
+  });
+```
+
+### `ipc.respond(requestName: string, responder: (...args) => Promise|any)`
+
+Registers a responder for the request. `responder` can return both `Promise` and normal values.
+
+```js
+var ipc = require("electron-safe-ipc/main");
+
+ipc.respond("add", function (a, b) {
+  return a + b;
+});
+
+ipc.respond("wait", function (ms) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, ms);
+  });
+});
+```
