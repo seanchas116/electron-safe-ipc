@@ -26,4 +26,6 @@ window.__electronSafeIpc = function (name, argsJson) {
   });
 };
 
+require("./request")(ipc);
+
 module.exports = ipc;

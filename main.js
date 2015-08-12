@@ -36,4 +36,6 @@ ipc.send = function() {
   });
 };
 
+require("./request")(ipc);
+
 module.exports = ipc;

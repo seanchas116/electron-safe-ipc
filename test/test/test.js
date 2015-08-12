@@ -22,3 +22,17 @@ describe("ipc", function () {
     ipc.send("fromMain", arg1, arg2);
   });
 });
+
+describe("request", function () {
+  it("make inter-process request with Promise", function (done) {
+    var arg1 = 1;
+    var arg2 = 2;
+    ipc.respond("requestFromRenderer", function (a1, a2) {
+      return a1 + a2;
+    });
+    ipc.request("requestFromMain", arg1, arg2).then(function (result) {
+      assert.equal(result, 4);
+      done();
+    });
+  });
+});

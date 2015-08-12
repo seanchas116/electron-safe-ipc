@@ -11,5 +11,10 @@
     electronSafeIpc.on("fromMain", function (a1, a2) {
       electronSafeIpc.send("fromRenderer", a1, a2);
     });
+    electronSafeIpc.respond("requestFromMain", function (a1, a2) {
+      return electronSafeIpc.request("requestFromRenderer", a1, a2).then(function (res) {
+        return res + 1;
+      });
+    });
   </script>
 </html>
