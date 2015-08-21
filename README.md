@@ -29,6 +29,7 @@ Use
 ### Main process
 
 ```js
+// in main
 var ipc = require("electron-safe-ipc/host");
 
 ipc.on("fromRenderer", function (a, b) {
@@ -62,18 +63,27 @@ ipc.on("fromMain", function (a, b) {
 </script>
 ```
 
-### Use main-side ipc in renderer process
+### Communicate between renderer process and `<webview>`
 
-You can use main-side `ipc` in renderer processes with `remote.require`.
-This is useful for communication between Node enabled renderer processes and Node disabled `<webview>`.
+You can use electron-safe-ipc to communicate between renderer processes and webviews.
 
 ```js
+// in renderer
 var ipc = require("electron-safe-ipc/host-webview");
 
-ipc.on("fromRenderer", function (a, b) {
-  console.log("fromRenderer received", a, b);
+ipc.on("fromWebview", function (a, b) {
+  console.log("fromWebview received", a, b);
 });
-ipc.send("fromMain", 1, 2);
+ipc.send("fromRenderer", 1, 2);
+```
+
+```js
+// in webview
+var ipc = require("electron-safe-ipc/guest");
+
+ipc.on("fromRenderer", function (a, b) {
+  ipc.send("fromWebview", a, b);
+});
 ```
 
 API
