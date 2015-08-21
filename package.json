@@ -9,7 +9,7 @@
   "scripts": {
     "renderer-bundle": "browserify guest.js -o guest-bundle.js -s electronSafeIpc",
     "pretest": "npm run renderer-bundle",
-    "test": "electron test"
+    "test": "electron test/webview && electron test/browser-window"
   },
   "author": "Ryohei Ikegami <iofg2100@gmail.com>",
   "license": "MIT",
