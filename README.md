@@ -79,13 +79,16 @@ ipc.on("fromWebview", function (a, b) {
 ipc.send("fromRenderer", 1, 2);
 ```
 
-```js
-// in webview
-var ipc = require("electron-safe-ipc/guest");
-
-ipc.on("fromRenderer", function (a, b) {
-  ipc.send("fromWebview", a, b);
-});
+```html
+<!-- in webview
+  suppose there is no node.js integration for webview
+  so require("electron-safe-ipc/guest") cannot be used -->
+<script src="path/to/node_modules/electron-safe-ipc/guest-bundle.js"></script>
+<script>
+  electronSafeIpc.on("fromRenderer", function (a1, a2) {
+    electronSafeIpc.send("fromWebview", a1, a2);
+  });
+</script>
 ```
 
 API
