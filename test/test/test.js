@@ -2,7 +2,7 @@
 
 var assert = require("chai").assert;
 var mainWindow = require("../mainWindow");
-var ipc = require("../../main");
+var ipc = require("../../host");
 
 describe("mainWindow title", function () {
   it("is Test", function () {

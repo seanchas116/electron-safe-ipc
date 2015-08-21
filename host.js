@@ -2,26 +2,10 @@
 
 var EventEmitter = require("events").EventEmitter;
 var BrowserWindow = require("browser-window");
-var protocol = require("protocol");
 var arraySlice = Array.prototype.slice;
-var url = require("url");
-var qs = require("querystring");
 
 var ipc = new EventEmitter();
-
-protocol.registerProtocol("electron-safe-ipc", function (request) {
-  // nextTick workaround to prevent crash on exception
-  process.nextTick(function () {
-    var urlContents = url.parse(request.url);
-    var queries = qs.parse(urlContents.query);
-
-    var channel = queries.channel;
-    var args = JSON.parse(queries.argsJson);
-
-    ipc.emit.apply(ipc, [channel].concat(args));
-  });
-  return new protocol.RequestStringJob({data: ""});
-});
+require("./protocol").register(ipc);
 
 ipc.send = function() {
   var channel = arguments[0];
