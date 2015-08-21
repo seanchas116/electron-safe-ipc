@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "renderer-bundle": "browserify renderer.js -o renderer-bundle.js -s electronSafeIpc",
+    "renderer-bundle": "browserify guest.js -o guest-bundle.js -s electronSafeIpc",
     "pretest": "npm run renderer-bundle",
     "test": "electron test"
   },

@@ -1,4 +1,39 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.electronSafeIpc = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (process){
+"use strict";
+
+var EventEmitter = require("events").EventEmitter;
+var qs = require("querystring");
+var arraySlice = Array.prototype.slice;
+
+var ipc = new EventEmitter();
+
+ipc.send = function () {
+  var channel = arguments[0];
+  var args = arraySlice.call(arguments, 1);
+
+  var req = new XMLHttpRequest();
+  var query = qs.stringify({
+    channel: channel,
+    argsJson: JSON.stringify(args),
+  });
+  req.open("GET", "electron-safe-ipc:///message?" + query);
+  req.send();
+}
+
+window.__electronSafeIpc = function (name, argsJson) {
+  process.nextTick(function () {
+    var args = JSON.parse(argsJson);
+    ipc.emit.apply(ipc, [name].concat(args));
+  });
+};
+
+require("./request")(ipc);
+
+module.exports = ipc;
+
+}).call(this,require('_process'))
+},{"./request":7,"_process":3,"events":2,"querystring":6}],2:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -301,7 +336,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -393,7 +428,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -479,7 +514,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -566,48 +601,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":3,"./encode":4}],6:[function(require,module,exports){
-(function (process){
-"use strict";
-
-var EventEmitter = require("events").EventEmitter;
-var qs = require("querystring");
-var arraySlice = Array.prototype.slice;
-
-var ipc = new EventEmitter();
-
-ipc.send = function () {
-  var channel = arguments[0];
-  var args = arraySlice.call(arguments, 1);
-
-  var req = new XMLHttpRequest();
-  var query = qs.stringify({
-    channel: channel,
-    argsJson: JSON.stringify(args),
-  });
-  req.open("GET", "electron-safe-ipc:///message?" + query);
-  req.send();
-}
-
-window.__electronSafeIpc = function (name, argsJson) {
-  process.nextTick(function () {
-    var args = JSON.parse(argsJson);
-    ipc.emit.apply(ipc, [name].concat(args));
-  });
-};
-
-require("./request")(ipc);
-
-module.exports = ipc;
-
-}).call(this,require('_process'))
-},{"./request":7,"_process":2,"events":1,"querystring":5}],7:[function(require,module,exports){
+},{"./decode":4,"./encode":5}],7:[function(require,module,exports){
 "use strict";
 
 module.exports = function (ipc) {
@@ -661,5 +661,5 @@ module.exports = function (ipc) {
   };
 };
 
-},{}]},{},[6])(6)
+},{}]},{},[1])(1)
 });
