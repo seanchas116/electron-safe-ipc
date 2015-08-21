@@ -29,7 +29,7 @@ Use
 ### Main process
 
 ```js
-var ipc = require("electron-safe-ipc/main");
+var ipc = require("electron-safe-ipc/host");
 
 ipc.on("fromRenderer", function (a, b) {
   console.log("fromRenderer received", a, b);
@@ -44,7 +44,7 @@ ipc.send("fromMain", 1, 2);
 If `"node-integration"` is disabled, use bundling tools (e.g., [browserify](http://browserify.org/)).
 
 ```js
-var ipc = require("electron-safe-ipc/renderer");
+var ipc = require("electron-safe-ipc/guest");
 
 ipc.on("fromMain", function (a, b) {
   ipc.send("fromRenderer", a, b);
@@ -54,7 +54,7 @@ ipc.on("fromMain", function (a, b) {
 #### Traditional style (UMD)
 
 ```html
-<script src="path/to/node_modules/electron-safe-ipc/renderer-bundle.js"></script>
+<script src="path/to/node_modules/electron-safe-ipc/guest-bundle.js"></script>
 <script>
   electronSafeIpc.on("fromMain", function (a1, a2) {
     electronSafeIpc.send("fromRenderer", a1, a2);
@@ -68,8 +68,7 @@ You can use main-side `ipc` in renderer processes with `remote.require`.
 This is useful for communication between Node enabled renderer processes and Node disabled `<webview>`.
 
 ```js
-var remote = require("remote");
-var ipc = remote.require("electron-safe-ipc/main");
+var ipc = require("electron-safe-ipc/host-webview");
 
 ipc.on("fromRenderer", function (a, b) {
   console.log("fromRenderer received", a, b);
@@ -101,7 +100,7 @@ Receive messages.
 Sends a request to the other side and get the response as `Promise`.
 
 ```js
-var ipc = require("electron-safe-ipc/renderer");
+var ipc = require("electron-safe-ipc/guest");
 
 ipc.request("add", 1, 2)
   .then(function(res) {
@@ -119,7 +118,7 @@ ipc.request("wait", 1000)
 Registers a responder for the request. `responder` can return both `Promise` and normal values.
 
 ```js
-var ipc = require("electron-safe-ipc/main");
+var ipc = require("electron-safe-ipc/host");
 
 ipc.respond("add", function (a, b) {
   return a + b;
