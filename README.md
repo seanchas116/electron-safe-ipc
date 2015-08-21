@@ -67,6 +67,8 @@ ipc.on("fromMain", function (a, b) {
 
 You can use electron-safe-ipc to communicate between renderer processes and webviews.
 
+LIMITATION: you cannot use `"electron-safe-ipc/host-webview"` multiple times (e.g., reloading renderer window or using multiple windows not supported).
+
 ```js
 // in renderer
 var ipc = require("electron-safe-ipc/host-webview");
