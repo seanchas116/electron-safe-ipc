@@ -13,7 +13,7 @@ if (typeof window === "object") {
 module.exports = {
   // FIXME: does not work in second registration
   register: function (ipc) {
-    protocol.registerProtocol("electron-safe-ipc", function (request) {
+    protocol.registerStringProtocol("electron-safe-ipc", function (request) {
       // nextTick workaround to prevent crash on exception
       process.nextTick(function () {
         var urlContents = url.parse(request.url);
@@ -24,7 +24,7 @@ module.exports = {
 
         ipc.emit.apply(ipc, [channel].concat(args));
       });
-      return new protocol.RequestStringJob({data: ""});
+      return "";
     });
   }
 };
