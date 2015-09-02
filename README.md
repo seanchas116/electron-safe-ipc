@@ -80,9 +80,7 @@ ipc.send("fromRenderer", 1, 2);
 ```
 
 ```html
-<!-- in webview
-  suppose there is no node.js integration for webview
-  so require("electron-safe-ipc/guest") cannot be used -->
+<!-- in webview -->
 <script src="path/to/node_modules/electron-safe-ipc/guest-bundle.js"></script>
 <script>
   electronSafeIpc.on("fromRenderer", function (a1, a2) {
