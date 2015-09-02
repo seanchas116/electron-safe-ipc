@@ -6,7 +6,7 @@ module.exports = function (ipc) {
 
   ipc.respond = function(name, func) {
     if (name in ipc.responders) {
-      throw new Error(`responder '${name}' already registered`);
+      throw new Error("responder " + name + " already registered");
     }
     ipc.responders[name] = func;
   }
@@ -15,7 +15,7 @@ module.exports = function (ipc) {
     try {
       var responder = ipc.responders[name];
       if (!responder) {
-        throw new Error(`responder not found for '${name}'`);
+        throw new Error("responder not found for " + name);
       }
       var result = Promise.resolve(responder.apply(undefined, args));
       result
