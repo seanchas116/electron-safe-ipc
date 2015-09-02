@@ -1,6 +1,6 @@
 {
   "name": "electron-safe-ipc",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Safe communication between main process and renderer processes in Electron",
   "main": "index.js",
   "directories": {
