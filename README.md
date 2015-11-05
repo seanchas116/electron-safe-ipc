@@ -1,3 +1,10 @@
+# DEPRECATED: Use Electron `ipc` within preload script instead
+
+Because of several problems (such as [this issue](https://github.com/seanchas116/electron-safe-ipc/issues/4) or [this limitation](https://github.com/seanchas116/electron-safe-ipc#communicate-between-renderer-process-and-webview)),
+I decided to deprecate electron-safe-ipc.
+
+Instead, I recommend using Electron `ipc` API within preload scripts.
+
 electron-safe-ipc [![npm version](https://badge.fury.io/js/electron-safe-ipc.svg)](http://badge.fury.io/js/electron-safe-ipc)
 ================
 
